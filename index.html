@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>RT-PA Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 30px auto;
+    }
+    input, button {
+      padding: 8px;
+      font-size: 16px;
+    }
+    .result {
+      margin-top: 20px;
+      padding: 15px;
+      border: 1px solid #ccc;
+    }
+    .result p {
+      margin: 6px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>RT-PA Dose Calculator</h2>
+
+  <label>น้ำหนัก (kg): </label>
+  <input type="number" id="weight" step="0.1" min="0">
+  <button onclick="calculate()">คำนวณ</button>
+
+  <div class="result" id="result" style="display:none;">
+    <p><strong>1. rt-PA ที่ต้องใช้:</strong> <span id="total"></span> mg</p>
+    <p><strong>2. 10% bolus (1 นาที push):</strong> <span id="bolus"></span> mg</p>
+    <p><strong>3. 90% drip 60 นาที:</strong> <span id="drip"></span> mg</p>
+    <p><strong>4. การใช้ขวดยา:</strong> <span id="vialText"></span></p>
+  </div>
+
+  <script>
+    function calculate() {
+      const weight = parseFloat(document.getElementById("weight").value);
+
+      if (isNaN(weight) || weight <= 0) {
+        alert("กรุณาใส่น้ำหนักให้ถูกต้อง");
+        return;
+      }
+
+      // สูตรพื้นฐาน
+      const totalDose = weight * 0.9;
+      const bolusDose = totalDose * 0.1;
+      const dripDose = totalDose - bolusDose;
+
+      // แสดงผลลัพธ์
+      document.getElementById("total").textContent = totalDose.toFixed(2);
+      document.getElementById("bolus").textContent = bolusDose.toFixed(2);
+      document.getElementById("drip").textContent = dripDose.toFixed(2);
+
+      // เงื่อนไขขวดยา
+      let vialText = "";
+
+      if (weight >= 10.0 && weight <= 55.5) {
+        const remaining = 50 - totalDose;
+        vialText = `ขวด 1 ดึงยาออกแล้ว drip เหลือ ${remaining.toFixed(2)} mg`;
+      } 
+      else if (weight >= 55.6 && weight <= 100) {
+        const vial2 = dripDose - (50 - bolusDose);
+        vialText = `ขวด 2 ดึงยาออกแล้ว drip ${vial2.toFixed(2)} mg`;
+      } 
+      else {
+        vialText = "น้ำหนักอยู่นอกช่วงที่กำหนด";
+      }
+
+      document.getElementById("vialText").textContent = vialText;
+      document.getElementById("result").style.display = "block";
+    }
+  </script>
+
+</body>
+</html>
