@@ -244,7 +244,7 @@
           </div>
 
           <div class="note">
-            เงื่อนไข: ถ้าน้ำหนัก <strong>&gt; 100 kg</strong> จะใช้ค่า <strong>100</strong> ในการคำนวณทั้งหมด
+            เงื่อนไข: ถ้าน้ำหนัก <strong>&gt; 100 kg</strong> จะใช้ค่า <strong>100 kgs</strong> ในการคำนวณทั้งหมด
             <div class="pill" id="capPill" style="display:none;">ใช้ค่าน้ำหนัก 100 kg (cap)</div>
           </div>
 
@@ -302,7 +302,7 @@
 
             <div class="row">
               <div>
-                <div class="k">ขวดที่ 2 ดึงยาออก</div>
+                <div class="k">ขวดที่ 2 ดึงยาเพิ่มอีก</div>
                 <div class="muted" id="vial2Formula">-</div>
               </div>
               <div class="v"><span id="vial2Mg">-</span> <span class="small">mg</span></div>
@@ -384,7 +384,7 @@
       } else {
         vial1FormulaEl.textContent = 'สูตร: (50 − bolus)-Drip';
         vial2FormulaEl.textContent = 'สูตร: ((น้ำหนัก×0.9)−bolus) − (50−bolus)';
-        logicTextEl.textContent = 'เงื่อนไข: น้ำหนัก > 55.5 kg และ ≤ 100 kg (ถ้าเกิน 100 ใช้ 100 แทน)';
+        logicTextEl.textContent = 'เงื่อนไข: น้ำหนัก > 55.5 kg และ ≤ 100 kg (ถ้าเกิน 100 kgs ใช้ 100 kgs แทน)';
       }
 
       // ✅ show results (mg) — IMPORTANT: no divide by 100
