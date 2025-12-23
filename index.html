@@ -369,7 +369,7 @@
 
       // ✅ 4) VIAL LOGIC (FIXED: NO /100 anywhere)
       // Vial 1 = 50 - total; if negative show 0
-      const vial1 = Math.min(total, 50);
+      const vial1 = Math.max(0, (50-bolus)-drip);
 
       // Vial 2
       const vial2 = (w <= 55.5)
@@ -378,11 +378,11 @@
 
       // ✅ formulas text
       if (w <= 55.5) {
-        vial1FormulaEl.textContent = 'สูตร: 50 − (น้ำหนัก × 0.9)';
+        vial1FormulaEl.textContent = 'สูตร: (50 − bolus)-Drip';
         vial2FormulaEl.textContent = 'น้ำหนัก ≤ 55.5 kg → ขวดที่ 2 ดึงยาออก 0 mg';
         logicTextEl.textContent = 'เงื่อนไข: น้ำหนัก ≤ 55.5 kg';
       } else {
-        vial1FormulaEl.textContent = 'สูตร: 50 − (น้ำหนัก × 0.9) (ถ้าติดลบ = 0)';
+        vial1FormulaEl.textContent = 'สูตร: (50 − bolus)-Drip';
         vial2FormulaEl.textContent = 'สูตร: ((น้ำหนัก×0.9)−bolus) − (50−bolus)';
         logicTextEl.textContent = 'เงื่อนไข: น้ำหนัก > 55.5 kg และ ≤ 100 kg (ถ้าเกิน 100 ใช้ 100 แทน)';
       }
