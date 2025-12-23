@@ -369,7 +369,7 @@
 
       // ✅ 4) VIAL LOGIC (FIXED: NO /100 anywhere)
       // Vial 1 = 50 - total; if negative show 0
-      const vial1 = Math.max(0, 50 - total);
+      const vial1 = Math.min(total, 50);
 
       // Vial 2
       const vial2 = (w <= 55.5)
